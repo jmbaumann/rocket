@@ -1,0 +1,230 @@
+{{#section 'head'}} 
+  <link rel="stylesheet" type="text/css" href="/css/admin-styles.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+{{/section}}
+
+{{>navbar}}
+
+<div id="admin-wrapper">
+
+  <br>
+  <h1>New PDS</h1>
+  <br>
+
+  <form method="post" action="/admin/new-PDS">
+    <div class="form-group">
+      <label>Title</label><br>
+      <input type="text" name="title">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Description</label><br>
+      <textarea name="description"></textarea>
+    </div>
+     <br>
+    <div class="form-group">
+      <label>Date</label><br>
+      <input type="text" name="posted_on">
+    </div>
+    <br>
+     <div class="form-group">
+      <label>PDS ID</label><br>
+      <input type="text" name="PDS_id">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>YouTube id</label><br>
+      <input type="text" name="youtube_id">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Thumbnail</label><br>
+      <input type="text" name="thumbnail">
+    </div>
+    <br>
+     <div class="form-group">
+      <label>Number of stories</label><br>
+      <input type="text" name="num_stories">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <br>
+  <h1>Video Form</h1>
+
+  <br>
+
+  <form method="post" action="/admin/cc/new-video">
+    <div class="form-group">
+      <label>Title</label><br>
+      <input type="text" name="title">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Description</label><br>
+      <textarea name="description"></textarea>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Date</label><br>
+      <textarea name="posted_on"></textarea>
+    </div>
+    <br>
+     <div class="form-group">
+      <label>Series</label><br>
+      <input type="text" name="series">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>YouTube id</label><br>
+      <input type="text" name="youtube_id">
+    </div>
+    <br>
+     <div class="form-group">
+      <label>Type: news / other</label><br>
+      <input type="text" name="type">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Thumbnail</label><br>
+      <input type="text" name="thumbnail">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Filepath</label><br>
+      <input type="text" name="filepath">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <br><br><br>
+
+  <h2>Edit Video</h2>
+  <form method="post" action="/admin/cc/edit">
+    <label>ID</label><br>
+    <input type="text" name="search_id">
+    <br>
+    <label>Title</label><br>
+    <input type="text" name="search_title">
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <br><br><br>
+
+  <h2>New Poll</h2>
+  <form method="post" action="/admin/make-poll">
+    <div class="form-group">
+      <label>Video ID</label><br>
+      <input type="text" name="id">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Story</label><br>
+      <input type="text" name="story">
+    </div>
+    <br>
+     <div class="form-group">
+      <label>Question</label><br>
+      <input type="text" name="question">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Number of choices</label><br>
+      <input type="number" name="num_choices">
+    </div>
+    <br>
+    <h3>Choices:</h3>
+     <div class="form-group">
+      <label>Choice 1</label><br>
+      <input type="text" name="choices">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Choice 2</label><br>
+      <input type="text" name="choices">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Choice 3</label><br>
+      <input type="text" name="choices">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Choice 4</label><br>
+      <input type="text" name="choices">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Choice 5</label><br>
+      <input type="text" name="choices">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Choice 6</label><br>
+      <input type="text" name="choices">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+
+  <br><br><br>
+  <h1>New Series</h1>
+  <br>
+
+  <form method="post" action="/admin/new-series">
+    <div class="form-group">
+      <label>Name</label><br>
+      <input type="text" name="name">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Description</label><br>
+      <textarea name="description"></textarea>
+    </div>
+    <br>
+     <div class="form-group">
+      <label>Thumbnail</label><br>
+      <input type="text" name="thumbnail">
+    </div>
+    <div class="form-group">
+      <label>Link</label><br>
+      <input type="text" name="link">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <br><br><br>
+  <h1>New Products</h1>
+  <br>
+
+  <form method="post" action="/admin/new-product">
+    <div class="form-group">
+      <label>Name</label><br>
+      <input type="text" name="name">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Price</label><br>
+      <textarea name="description"></textarea>
+    </div>
+    <br>
+     <div class="form-group">
+      <label>Thumbnail</label><br>
+      <input type="text" name="thumbnail">
+    </div>
+    <div class="form-group">
+      <label>Link</label><br>
+      <input type="text" name="link">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+</div>

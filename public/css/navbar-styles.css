@@ -1,0 +1,197 @@
+* {
+	font-family: 'Ubuntu', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: rgb(86,26,26);  /*dark red*/
+}
+
+/*---------------------------------------------------------*\
+	TOP BAR NAVIGATION
+	SEARCH BAR
+	SIGN UP / LOGIN / PROFILE
+\*---------------------------------------------------------*/
+
+#top-bar {
+	display: block;
+	position: fixed;
+	height: 50px;
+	width: 100%;
+	background-color: rgb(86,26,26);  /*dark red*/
+	z-index: 100;
+}
+
+#top-bar a {
+	
+}
+
+.top-bar-links {
+	color: white;
+	font-size: 16px;
+	margin-top: 15px;
+	padding-left: .8em;
+	padding-right: .8em;
+	text-decoration: none;
+	float: left;
+}
+
+#top-bar a:hover {
+	/*font-weight: bold;*/
+	/*text-decoration: underline;*/
+
+}
+
+.top-bar-links:hover {
+	color: rgb(195,194,194);  /*gray*/
+}
+
+#top-bar .nav-active {
+	color: white;
+	font-weight: bold;
+}
+
+.profile, #searchbar {
+	float: right;
+	margin-left: .5em;
+	margin-right: 1.7em;
+}
+
+#searchbar {
+	margin-top: 8px;
+}
+
+#profile-wrapper img {
+	max-height: 32px;
+	border-radius: 50%;
+	float: left;
+	margin-right: .5em;
+	margin-top: 9px;
+}
+
+
+
+
+
+#profile-wrapper {
+	position: relative;
+  	display: inline-block;
+  	height: 100%;
+}
+
+#profile-dropdown-menu {
+	display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 50px;
+}
+
+#profile-dropdown-menu a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+#profile-wrapper:hover #profile-dropdown-menu {
+	display: block;
+}
+
+
+
+
+
+#searchbar input {
+	border: none;
+	border-radius: 4px;
+	padding: 2px;
+	padding-left: 6px;
+	height: 28px;
+	width: 274px;
+	font-size: .9em;
+	outline: none;
+}
+
+#searchbar button {
+	background-color: rgb(195,194,194);  /*gray*/
+	color: rgb(86,26,26);  /*dark red*/
+	padding: 4px;
+	height: 33px;
+	width: 33px;
+	border: none;
+	border-radius: 15%;
+	outline: none;
+	font-size: 14px;
+}
+
+#searchbar button:hover {
+	cursor: pointer;
+	font-size: 15px;
+}
+
+
+
+footer {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+footer ul {
+	list-style: none;
+}
+
+footer ul li {
+	display: block;
+	float: left;
+	margin: 0 10px;
+}
+
+footer a {
+	text-decoration: none;
+	color: white;
+}
+
+footer p {
+	color: white;
+	display: block;
+	padding-top: 95px;
+	width: 100%;
+	text-align: center;
+	white-space: pre;
+}
+
+#business {
+	float: left;
+	margin-left: 20px;
+}
+
+#social {
+	float: right;
+	margin-right: 20px;
+	font-size: 1.5em;
+}
+
+#business,
+#social {
+	display: inline-block;
+}
+
+
+
+/*FIREFOX*/
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+a::-moz-focus-inner {
+  border: 0;
+}
+
+a:focus {
+	outline: 0 none !important;
+}

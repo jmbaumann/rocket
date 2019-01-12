@@ -1,0 +1,75 @@
+<br>
+<h1>Video Form</h1>
+
+<br>
+
+{{#each result}}
+	<p>Title</p>
+	<p>{{title}}</p>
+	<br>
+	<p>Description</p>
+	<p>{{description}}</p>
+	<br>
+	<p>Posted on:</p>
+	<p>{{posted_on}}</p>
+	<br>
+	<p>Views</p>
+	<p>{{view_count}}</p>
+	<br>
+	<p>Series</p>
+	<p>{{series}}</p>
+
+	<br>
+	<a href="/admin/edit-video/{{_id}}"><button>Edit</button></a>
+	<br>
+	<button>Delete</button>
+{{/each}}
+
+{{#if video}}
+	<h2>Matching Video</h2>
+	<br>
+
+	<form method="post" action="/admin/cc/edit-video/{{video._id}}">
+	  <div class="form-group">
+	    <label>Title</label><br>
+	    <input type="text" name="title" value="{{video.title}}">
+	  </div>
+	  <br>
+	  <div class="form-group">
+	    <label>Description</label><br>
+	    <input type="text" name="description" value="{{video.description}}">
+	  </div>
+	  <br>
+	   <div class="form-group">
+	    <label>Series</label><br>
+	    <input type="text" name="series" value="{{video.series}}">
+	  </div>
+	  <br>
+	   <div class="form-group">
+	    <label>View Count</label><br>
+	    <input type="text" name="view_count" value="{{video.view_count}}">
+	  </div>
+	  <br>
+	   <div class="form-group">
+	    <label>Posted On</label><br>
+	    <input type="text" name="posted_on" value="{{video.posted_on}}">
+	  </div>
+	  <br>
+	  <div class="form-group">
+	    <label>YouTube id</label><br>
+	    <input type="text" name="youtube_id" value="{{video.youtube_id}}">
+	  </div>
+	  <br>
+	   <div class="form-group">
+	    <label>Filepath</label><br>
+	    <input type="text" name="filepath" value="{{video.filepath}}">
+	  </div>
+	  <br>
+	  <div class="form-group">
+	    <label>Thumbnail</label><br>
+	    <input type="text" name="thumbnail" value="{{video.thumbnail}}">
+	  </div>
+	  <br>
+	  <button type="submit" class="btn btn-default">Submit</button>
+	</form>
+{{/if}}

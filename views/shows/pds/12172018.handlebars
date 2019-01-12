@@ -1,0 +1,452 @@
+{{#section 'head'}} 
+    <link rel="stylesheet" type="text/css" href="/css/grid-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/pds-styles.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/pds/12172018-scripts.js"></script>
+    <script type="text/javascript" src="/js/carousel.js"></script>
+    <script type="text/javascript" src="/js/info.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/read-more-helpers.js"></script>
+{{/section}}
+
+{{>navbar}}
+ 
+ <div class="wrapper">
+
+    <div class="left">
+      <div id="player-wrapper">
+        <div id="player"></div>
+      </div>
+
+      <div id="info-wrapper">
+        <div id="info-nav">
+          <ul id="info-nav-links">
+            <li class="tab open"><a onclick="infoTab(0)" href="javascript:void(0);">About</a></li>
+            <li class="tab"><a onclick="infoTab(1)" href="javascript:void(0);">Story Navigation</a></li>
+            <li class="tab"><a onclick="infoTab(2)" href="javascript:void(0);">Credits</a></li>
+          </ul>
+        </div>
+        <div id="info">
+          <div class="info-window" id="info-title">
+            <h2 class="info-heading">The James Charles Privacy Problem Is Actually Much Bigger, Kanye West, Pete Davidson, &amp; The UN</h2>
+            <p>Posted on Dec 17, 2018</p>
+          </div>
+
+          <div class="info-window" id="info-story-nav" hidden>
+            <h2 class="info-heading">Jump to a story</h2>
+            <ul id="story-nav-links">
+              <li><a class="story-nav" onclick="navTo(0)" href="javascript:void(0);">Intro</a></li>
+              <li><a class="story-nav" onclick="navTo(1)" href="javascript:void(0);">James Charles</a></li>
+              <li><a class="story-nav" onclick="navTo(2)" href="javascript:void(0);">Text Tax</a></li>
+              <li><a class="story-nav" onclick="navTo(3)" href="javascript:void(0);">Today In Awesome</a></li>
+              <li><a class="story-nav" onclick="navTo(4)" href="javascript:void(0);">Kanye / Ariana / Pete</a></li>
+              <li><a class="story-nav" onclick="navTo(5)" href="javascript:void(0);">Migration Protests</a></li>
+              <li><a class="story-nav" onclick="navTo(6)" href="javascript:void(0);">Outro</a></li>
+            </ul>
+          </div>
+
+          <div class="info-window" id="info-credits" hidden>
+            <h2 class="info-heading">Credits</h2>
+            <p>Edited by: James Girardier, Julie Goldberg</p>
+            <p>Produced by: Amanda Morones</p>
+            <p>Art Director: Brian Borst</p>
+            <p>Writing/Research: Philip DeFranco, Brian Espinoza, Neena Pesqueda, Cecelia Applegate</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+      
+
+    <div class="right">
+      <div id="read-more">
+        <button type="button" id="minimized-read-more" class="hide-show-read-more" onclick="hideOrShow()" hidden><i class="fas fa-plus-square"></i></button>
+        <span id="mini-bar" hidden></span>
+        <div id="live-read-more">
+          <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+          
+          <div class="panel showing">
+            <h1 class="panel-title">What's up you beautiful bastards?</h1>
+            <h2>Welcome to the Philip DeFranco Show for Dec 17, 2018</h2>
+          </div>
+
+          <span class="progress-bar"></span>
+        </div>
+      </div>
+
+      <div id="conversation">
+        <div id="live-conversation">
+          <div id="comment-top-bar">
+            <h1>Comments</h1>
+            <!-- <label>Sort by</label>
+            <button id="most-recent" class="sort-by sorted">Most Recent</button>
+            <button id="top-voted" class="sort-by">Top Voted</button> -->
+          </div>
+
+          <div id="comments-wrapper">
+            {{#each comments}}
+            <div class="comment">
+              <img src="/img/avatar.png" class="pfp">
+              <p class="username">{{user_name}}</p>
+              <p class="date">{{posted_on}}</p>
+              <p class="content">{{content}}</p>
+              <button class="comment-button" id="reply" href="#">Reply</button>
+              <button class="comment-button vote" id="disagree" href="#">Disagree ({{dislikes}})</button>
+              <button class="comment-button vote" id="agree" href="#">Agree ({{likes}})</button>
+            </div>
+            {{/each}}
+          </div>
+          
+          <div class="add-comment">
+            {{#if user}}
+            <form id="comment-form">
+              <textarea id="comment-content" name="comment" placeholder="Join the conversation..."></textarea>
+              <br>
+              <input id="hidden-episode-name" hidden type="text" name="episode" value="12172018">
+              <input id="hidden-story" hidden type="text" name="story" value="0">
+              <input id="hidden-user-id" hidden type="text" value="{{user._id}}"></input>
+              <input id="hidden-user-name" hidden type="text" value="{{user.first_name}} {{user.last_name}}"></input>
+              <button type="submit">Submit</button>
+            </form>
+            {{else}}
+            <p id="logged-out-comment">You must <a href="/users/login">log in</a> or <a href="/users/signup">sign up</a> to leave a comment.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- READ MORE -->
+
+<!-- INTRO -->
+<div id="story0-read-more" hidden>
+  <div class="panel showing">
+    <h1 class="panel-title">What's up you beautiful bastards?</h1>
+    <h2>Welcome to the Philip DeFranco Show for Dec 17, 2018</h2>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- JAMES CHARLES -->
+<div id="story1-read-more" hidden>
+  <div id="story1-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.wetheunicorns.com/youtubers/james-charles/fans-turning-up-at-his-house/" target="_blank"><h2>James Charles says he feels unsafe in his own home after fans leaked his address</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Woodrow Whyte</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by We The Unicorns on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.bbc.com/news/newsbeat-46589770" target="_blank"><h2>YouTuber James Charles: Stop showing up at my house</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Uncredited</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by BBC on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="http://www.newnownext.com/james-charles-fan-shows-up-at-house/12/2018/" target="_blank"><h2>James Charles Pleads for Privacy After Scary Encounter With Fan at His Home</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Jeff Taylor</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by NewNowNext on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- TEXT TAX -->
+<div id="story2-read-more" hidden>
+  <div id="story2-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://abc7news.com/society/california-text-tax-vote-cancelled-after-fcc-ruling/4907901/" target="_blank"><h2>California 'Text Tax' vote cancelled after FCC ruling</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Uncredited</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by ABC7 News on December 15, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>1 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- TODAY IN AWESOME -->
+<div id="story3-read-more" hidden>
+  <div id="story3-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+    <span class="dot" onclick="currentPanel(5)"></span> 
+    <span class="dot" onclick="currentPanel(6)"></span> 
+    <span class="dot" onclick="currentPanel(7)"></span> 
+    <span class="dot" onclick="currentPanel(8)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Brought To You By</h1>
+    <a class="article-title" href="https://www.SeatGeekPhil.com" target="_blank"><h2>Seat Geek - Get $20 off tickets with code PHIL</h2></a>
+    <a class="article-thumbnail" href="https://www.SeatGeekPhil.com" target="_blank"><img src="/img/seat-geek.png"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://teespring.com/greatest-day-duffel-bag#pid=723&cid=103068&sid=front" target="_blank"><h2>Greatest Day Duffel Bag</h2></a>
+    <a class="article-thumbnail" href="https://teespring.com/greatest-day-duffel-bag#pid=723&cid=103068&sid=front" target="_blank"><img src="/img/greatest-duffel.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=a2GVxYfKSxA" target="_blank"><h2>Elon Musk vs Mark Zuckerberg - Epic Rap Battles of History.</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=a2GVxYfKSxA" target="_blank"><img src="/img/tia-erbmusk.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=a4-uIJJPrG4" target="_blank"><h2>PewDiePie vs T-Series. Flash In The Pan Hip Hop Conflicts Of Nowadays.</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=a4-uIJJPrG4" target="_blank"><img src="/img/tia-erbpew.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=shwFNKP_mI4" target="_blank"><h2>Home Alone Games with Macaulay Culkin - Angry Video Game Nerd (Episode 164)</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=shwFNKP_mI4" target="_blank"><img src="/img/tia-homealone.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=KqVhbpBR8Lw" target="_blank"><h2>Behind the Magic: The Visual Effects of Ready Player One</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=KqVhbpBR8Lw" target="_blank"><img src="/img/tia-rp1.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=VfOY1-kgf1M" target="_blank"><h2>John Cena Has Serious Questions About Transformers</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=VfOY1-kgf1M" target="_blank"><img src="/img/tia-cena.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=dIUr-VnUdDY" target="_blank"><h2>HISHE Dubs: Transformers (Comedy Recap)</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=dIUr-VnUdDY" target="_blank"><img src="/img/tia-hishetran.jpg"></a>
+  </div>
+
+  <!-- <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=ERqMhMg-HDA" target="_blank"><h2>When Giving Is Better Than Receiving! | FGF 4</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=ERqMhMg-HDA" target="_blank"><img src="/img/fgf3.jpg"></a>
+  </div> -->
+  
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=ursltNhpNpc" target="_blank"><h2>Secret Link of the Day</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=ursltNhpNpc" target="_blank"><img src="/img/tia-secret.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- KANYE / ARIANA/ PETE -->
+<div id="story4-read-more" hidden>
+  <div id="story4-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://slate.com/culture/2018/12/ariana-grande-pete-davidson-kanye-west-instagram.html" target="_blank"><h2>Ariana Grande Is Sorry, Kanye West Is Off His Meds, and Pete Davidson Deleted His Instagram. Here’s Why.</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Matthew Dessem</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Slate on December 15, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>8 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.nytimes.com/2018/12/15/arts/television/pete-davidson-instagram-post.html" target="_blank"><h2>Pete Davidson of ‘Saturday Night Live’ Is Accounted For After a Worrying Instagram Post</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Christina Caron and Jeffery C. Mays</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The New York Times on December 15, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>7 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.eonline.com/news/997003/ariana-grande-says-i-m-here-after-pete-davidson-sends-cry-for-help" target="_blank"><h2>Ariana Grande Says "I'm Here" After Pete Davidson Sends Cry for Help</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Corrine Heller</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by E! News on December 15, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- MIGRANT PROTESTS -->
+<div id="story5-read-more" hidden>
+  <div id="story5-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+    <span class="dot" onclick="currentPanel(5)"></span>
+    <span class="dot" onclick="currentPanel(6)"></span> 
+    <span class="dot" onclick="currentPanel(7)"></span>
+    <span class="dot" onclick="currentPanel(8)"></span>
+    <span class="dot" onclick="currentPanel(9)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://cis.org/Rush/Global-Compact-Migration-Adopted-Week-Expected" target="_blank"><h2>Global Compact for Migration Adopted This Week as Expected</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Nayla Rush</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Center for Immigration Studies on December 14, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>6 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Related Documents</h1>
+    <a class="article-title" href="https://refugeesmigrants.un.org/declaration" target="_blank"><h2>New York Declaration for Refugees and Migrants (from the UN Summit for Refugees and Migrants 2016)</h2></a>
+    <p class="reading-description">Published October 3, 2016</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.politico.eu/article/belgium-sets-up-minority-government-after-migration-dispute-breaks-coalition/" target="_blank"><h2>Belgium sets up minority government after migration dispute breaks coalition</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Lauren Cerulus and Sarah Wheaton</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Politico on December 9, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.telegraph.co.uk/news/2018/12/16/brussels-police-use-tear-gas-water-cannon-far-right-activists/" target="_blank"><h2>Tear gas fired as anti-migration protesters clash with police outside EU in Brussels</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Rory Mulholland </p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Vox on December 16, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.bbc.com/news/world-europe-46585237" target="_blank"><h2>Brussels protest over UN migration pact turns violent</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Uncredited</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by BBC News on December 16, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.npr.org/2018/12/17/677295414/protesters-clash-with-police-in-brussels-at-rally-against-un-migration-pact" target="_blank"><h2>Protesters And Police Clash In Brussels At Rally Against UN Migration Pact</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Francesca Paris</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by NPR on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.reuters.com/article/us-europe-migrants-un-pact/u-n-members-adopt-global-migration-pact-rejected-by-u-s-and-others-idUSKBN1O90YS" target="_blank"><h2>U.N. members adopt global migration pact rejected by U.S. and others</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Ulf Laessing and Anreas Rinke </p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Reuters on December 10, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Related Document</h1>
+    <a class="article-title" href="https://www.un.org/pga/72/wp-content/uploads/sites/51/2018/07/migration.pdf" target="_blank"><h2>Global Compact for Safe, Orderly and Regular Migration</h2></a>
+    <p class="reading-description">Published July 11, 2018</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Related Document</h1>
+    <a class="article-title" href="https://www.unhcr.org/gcr/GCR_English.pdf" target="_blank"><h2>Report of the United Nations High Commissioner for Refugees</h2></a>
+    <p class="reading-description">Published August 2, 2018</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.dw.com/en/un-refugee-compact-what-you-need-to-know/a-46762949" target="_blank"><h2>UN refugee compact: What you need to know</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Nik Martin</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by DW on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>6 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- OUTRO -->
+<div id="story6-read-more" hidden>
+  <div id="story6-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Miss yesterday's PDS? Get Phil'd In</h1>
+    <a class="article-title" href="/shows/PDS/12142018"><h2>Horrifying NYPD Video Goes Viral, David Dobrik Rejected, Florida Drill Gone Wrong, &amp; Twitch Evolves</h2></a>
+    <a class="article-thumbnail" href="/shows/PDS/12142018"><img src="/img/12142018.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">The Latest Morning Breakdown</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=B_smHgWO6F8" target="_blank"><h2>The War In Afghanistan, 17 Years Later Here's Why It Might Never End...</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=B_smHgWO6F8" target="_blank"><img src="/img/taliban.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Thanks for the support!</h1>
+    <a class="article-title" href="https://www.patreon.com/DeFranco" target="_blank"><h2>Join DeFranco Elite on Patreon</h2></a>
+    <a class="article-thumbnail" href="https://www.patreon.com/DeFranco" target="_blank"><img src="/img/patreon.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>

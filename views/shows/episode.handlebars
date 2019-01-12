@@ -1,0 +1,103 @@
+{{#section 'head'}}	
+	<link rel="stylesheet" type="text/css" href="/css/episode-styles.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/css/user-popup.css"> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/episode.js"></script>
+    <!-- <script type="text/javascript" src="/js/user-popup-scripts.js"></script> -->
+{{/section}}
+
+{{>navbar}}
+
+<div id="episode-wrapper">
+	<div id="player-wrapper">
+        <div id="player"></div>
+        <div id="episode-info">
+        	<h1 id="episode-title">{{video.title}}</h1>
+        	<p id="posted-on">{{video.posted_on}}</p>
+        	<p id="about">{{video.description}}</p>	
+        	<!-- <button class="like"><i class="far fa-thumbs-up"></i></button>
+        	<button class="like"><i class="far fa-thumbs-down"></i></button> -->
+        	<!-- <button id="share">Share</button> -->
+        </div>
+    </div>
+
+    <div id="up-next-wrapper">
+        <h2><a href="/shows/other">More {{video.series}}</a></h2>
+        <div class="episode-carousel">
+            <button type="button" id="shiftL" class="car-control">&#10094;</button>
+            <button type="button" id="shiftR" class="car-control">&#10095;</button>
+
+            <ul class="all-episodes" id="up-next">
+                {{#each episodes}}
+                <li class="episode">
+                    <a href="{{filepath}}"><img src="/img/{{thumbnail}}"></a>
+                    <a href="{{filepath}}" class="title">{{title}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+	
+	<h2 id="com-heading">Comments</h2>
+    <div id="comments-wrapper">
+        {{#if user}}
+    	<div id="add-comment">
+    		<!-- <form method="post" action="/shows/comment"> -->
+            <form id="comment-form">
+                <div id="text-area-wrapper">
+    		        <textarea id="comment-content" name="comment" placeholder="Join the conversation..."></textarea>
+                </div>
+		        <br>
+                <input id="hidden-id" hidden type="text" name="id" value="">
+                <input id="hidden-user-id" hidden type="text" value="{{user._id}}"></input>
+                <input id="hidden-user-name" hidden type="text" value="{{user.first_name}} {{user.last_name}}"></input>
+		        <button type="submit" id="submit-comment">
+                 <!-- onclick="submitComment('{{user.first_name}}' + ' ' + '{{user.last_name}}')">-->
+                Submit</button> 
+		    </form>
+    	</div>
+        {{else}}
+        <div id="must-login">
+            <p>You must <a href="/users/login">login</a> or <a href="/users/signup">sign up</a> to leave a comment.</p>
+        </div>
+        {{/if}}
+
+    	<div id="comment-top-bar">
+    		<!-- <label>Sort by</label>
+    		<button id="most-recent" class="sort-by sorted">Most Recent</button>
+    		<button id="top-voted" class="sort-by">Top Voted</button> -->
+    	</div>
+
+    	<div id="display-comments">
+            <div id="new-comment"></div>
+            {{#each comments}}
+    		<div class="comment">
+                <span hidden id="com-id">{{_id}}</span>
+    			<img class="profile-pic" src="/img/avatar.png"></img>
+    			<p class="username">{{user_name}}</p>
+    			<p class="date">{{posted_on}}</p>
+    			<p class="content">{{content}}</p>
+    			<button class="comment-button" id="reply">Reply</button>
+                {{#if voted}}
+                <div class="comment-button vote">
+                    <button class="like"><i class="fas fa-thumbs-up"></i></button><label class="num-likes">{{likes}}</label>
+                </div>
+                {{else}}
+                <div class="comment-button vote">
+                    <button class="like"><i class="far fa-thumbs-up"></i></button><label class="num-likes">{{likes}}</label>
+                </div>
+                {{/if}}
+    		</div>
+            {{/each}}
+    	</div>
+    </div>
+</div>
+
+{{>footer}}
+
+<script>
+    setYTID('{{video.youtube_id}}');
+    setDBID('{{video._id}}');
+</script>

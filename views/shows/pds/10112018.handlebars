@@ -1,0 +1,426 @@
+{{#section 'head'}} 
+    <link rel="stylesheet" type="text/css" href="/css/grid-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/pds-styles.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/pds/PDS10112018-scripts.js"></script>
+    <script type="text/javascript" src="/js/carousel.js"></script>
+    <script type="text/javascript" src="/js/info.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/read-more-helpers.js"></script>
+{{/section}}
+
+{{>navbar}}
+ 
+ <div class="wrapper">
+
+    <div class="left">
+      <div id="player-wrapper">
+        <div id="player"></div>
+      </div>
+
+      <div id="info-wrapper">
+        <div id="info-nav">
+          <ul id="info-nav-links">
+            <li class="tab open"><a onclick="infoTab(0)" href="javascript:void(0);">Title / Details / About</a></li>
+            <li class="tab"><a onclick="infoTab(1)" href="javascript:void(0);">Story Navigation</a></li>
+            <li class="tab"><a onclick="infoTab(2)" href="javascript:void(0);">Credits</a></li>
+          </ul>
+        </div>
+        <div id="info">
+          <div class="info-window" id="info-title">
+            <h2 class="info-heading">What The McGregor Khabib Chaos Shows Us, NY Limo Charges Fall On Son, Missing Journalist &amp; More</h2>
+            <p>Posted on Oct 11, 2018</p>
+          </div>
+
+          <div class="info-window" id="info-story-nav" hidden>
+            <h2 class="info-heading">Jump to a story</h2>
+            <ul id="story-nav-links">
+              <li><a class="story-nav" onclick="navTo(0)" href="javascript:void(0);">Intro</a></li>
+              <li><a class="story-nav" onclick="navTo(1)" href="javascript:void(0);">McGregor vs Khabib</a></li>
+              <li><a class="story-nav" onclick="navTo(2)" href="javascript:void(0);">Today In Awesome</a></li>
+              <li><a class="story-nav" onclick="navTo(3)" href="javascript:void(0);">Limo Crash Update</a></li>
+            </ul>
+            <ul id="story-nav-links" class="push-down">
+              <li><a class="story-nav" onclick="navTo(4)" href="javascript:void(0);">Washington Death Penalty</a></li>
+              <li><a class="story-nav" onclick="navTo(5)" href="javascript:void(0);">Saudi Journalist Update</a></li>
+            </ul>
+          </div>
+
+          <div class="info-window" id="info-credits" hidden>
+            <h2 class="info-heading">Credits</h2>
+            <p>Edited by: James Girardier</p>
+            <p>Produced by: Amanda Morones</p>
+            <p>Art Director: Brian Borst</p>
+            <p>Writing/Research: Philip DeFranco, Cecelia Applegate, Cody Snell, Dylan Siegel</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+      
+
+    <div class="right">
+      <div id="read-more">
+        <button type="button" id="minimized-read-more" class="hide-show-read-more" onclick="hideOrShow()" hidden><i class="fas fa-plus-square"></i></button>
+        <span id="mini-bar" hidden></span>
+        <div id="live-read-more">
+          <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+          <p>Welcome!</p>
+          <span class="progress-bar"></span>
+        </div>
+      </div>
+
+      <div id="conversation">
+        <div id="live-conversation">
+          <div id="comment-top-bar">
+            <h1>Comments</h1>
+            <label>Sort by</label>
+            <button id="most-recent" class="sort-by sorted">Most Recent</button><!--
+            --><button id="top-voted" class="sort-by">Top Voted</button>
+          </div>
+
+          <div id="comments-wrapper">
+            {{#each comments}}
+            <div class="comment">
+              <img src="/img/avatar.png" class="pfp">
+              <p class="username">{{user_name}}</p>
+              <p class="date">{{posted_on}}</p>
+              <p class="content">{{content}}</p>
+              <button class="comment-button" id="reply" href="#">Reply</button>
+              <button class="comment-button vote" id="disagree" href="#">Disagree ({{dislikes}})</button>
+              <button class="comment-button vote" id="agree" href="#">Agree ({{likes}})</button>
+            </div>
+            {{/each}}
+          </div>
+          
+          <div class="add-comment">
+            {{#if user}}
+            <form id="comment-form"> <!--  onsubmit="submitComment()"> -->
+              <textarea id="comment-content" name="comment" placeholder="Join the conversation..."></textarea>
+              <br>
+              <input id="hidden-episode-name" hidden type="text" name="episode" value="10112018">
+              <input id="hidden-story" hidden type="text" name="story" value="0">
+              <input id="hidden-user-id" hidden type="text" value="{{user._id}}"></input>
+              <input id="hidden-user-name" hidden type="text" value="{{user.first_name}} {{user.last_name}}"></input>
+              <button type="submit">Submit</button>
+            </form>
+            {{else}}
+            <p id="logged-out-comment">You must <a href="/users/login">log in</a> or <a href="/users/signup">sign up</a> to leave a comment.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- READ MORE -->
+
+<!-- INTRO -->
+<div id="story0-read-more" hidden>
+  <p>Welcome!</p>
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- MCGREGOR VS KHABIB -->
+<div id="story1-read-more" hidden>
+  <div id="story1-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://deadspin.com/khabib-nurmagomedov-taps-out-conor-mcgregor-attacks-co-1829580622" target="_blank"><h2>Khabib Nurmagomedov Taps Out Conor McGregor, Attacks Conor Coach In Crowd, All Hell Breaks Loose [Updates]</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Patrick Redford</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Deadspin on October 7, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://deadspin.com/khabib-nurmagomedov-threatens-to-quit-ufc-if-his-mcgreg-1829682112" target="_blank"><h2>Khabib Nurmagomedov Threatens To Quit UFC If His McGregor-Attacking Buddy Is Fired</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Tom Ley</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Deadspin on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>1 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="http://www.espn.com/mma/story/_/id/24932166/projecting-next-ufc-fights-khabib-nurmagomedov-conor-mcgregor-others-ufc-229" target="_blank"><h2>What's next for Nurmagomedov, McGregor and other UFC 229 fighters?</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Brett Okamoto</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by ESPN on October 8, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+  <div class="panel poll">
+    <h1 class="panel-title">Poll</h1>
+    <h3>Who were you hoping would win UFC 229?</h3>
+      <form id="poll-form2">
+        <input type="radio" name="vote" value="0">
+        McGregor
+        <br>
+        <input type="radio" name="vote" value="1">
+        Khabib
+        <br>
+        <input type="radio" name="vote" value="2"> 
+        Happy with either
+        <br>
+        <input type="radio" name="vote" value="3">
+        I don't care about the UFC
+        <br>
+        {{#if user}}
+        <button type="submit">Submit</button>
+        {{else}}
+        <button id="show-results" onclick="pollSubmit()">Show Results</button>
+        {{/if}}
+      </form>
+  </div>
+
+  <div class="panel poll results">
+    <h1 class="panel-title">Poll</h1>
+    <h3>Who were you hoping would win UFC 229?</h3>
+    <div id="results-box">
+      <p class="poll-option">McGregor</p>
+      <span class="poll-bar" id="choice-1"><p class="poll-percentage">40%</p></span>
+      <p class="poll-option">Khabib</p>
+      <span class="poll-bar" id="choice-2"><p class="poll-percentage">30%</p></span>
+      <p class="poll-option">Happy with either</p>
+      <span class="poll-bar" id="choice-3"><p class="poll-percentage">18%</p></span>
+      <p class="poll-option">I don't care about the UFC</p>
+      <span class="poll-bar" id="choice-4"><p class="poll-percentage">12%</p></span>
+    </div>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- TODAY IN AWESOME -->
+<div id="story2-read-more" hidden>
+  <div id="story2-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1>Today in Awesome</h1>
+    <h2>Glass Trailer</h2>
+    <a href="https://www.youtube.com/watch?v=Q7ztHi9ejp4" target="_blank">Trailer</a>
+  </div>
+
+  <div class="panel">
+    <h1>Today in Awesome</h1>
+    <h2>Dakota Johnson Takes a Lie Detector Test</h2>
+  <a href="https://www.youtube.com/watch?v=Pqrax61NQrA" target="_blank">Video</a>
+  </div>
+
+  <div class="panel">
+    <h1>Today in Awesome</h1>
+    <h2>73 Questions with Kloss, Neistat and Graham</h2>
+  <a href="https://youtu.be/bVwAp2eMyko" target="_blank">Video</a>
+  </div>
+
+  <div class="panel">
+    <h1>Today in Awesome</h1>
+    <h2>Tenacious D on Hot Ones</h2>
+  <a href="https://youtu.be/X2zqiX6yL3I" target="_blank">Video</a>
+  </div>
+
+  <div class="panel">
+    <h1>Today in Awesome</h1>
+    <h2>Secret Link</h2>
+    <a href="https://youtu.be/ybx8a6e3j1k" target="_blank">Secret???</a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- LIMO CRASH -->
+<div id="story3-read-more" hidden>
+  <div id="story3-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.cnn.com/2018/10/10/us/new-york-limo-crash/index.html" target="_blank"><h2>Limo company owner's son pleads not guilty to charge in connection with deadly New York crash</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Eliott C. McLaughlin and Aaron Cooper</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by CNN on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>9 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.nytimes.com/2018/10/10/nyregion/nauman-hussain-arrested-limo-crash.html" target="_blank"><h2>Limo Firm’s Operator Is Charged in Fatal Upstate New York Crash</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Jesse McKinley and William K. Rashbaum</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The New York Times on October 10, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>7 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.usatoday.com/story/news/nation-now/2018/10/10/ny-limo-crash-son-prestige-limo-owner-taken-into-custody/1589835002/" target="_blank"><h2>Troopers arrest operator of limo company after deadly New York crash</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Joseph Spector and Jon Campbell</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by USA Today on October 10, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- WASHINGTON DEATH PENALTY -->
+<div id="story4-read-more" hidden>
+  <div id="story4-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.axios.com/washington-state-supreme-court-death-penalty-e84dd299-b998-4aff-95de-db63eef8b643.html" target="_blank"><h2>Washington becomes 20th state to outlaw executions</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Khorri Atkinson</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Axios on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://thehill.com/homenews/state-watch/410963-washington-state-supreme-court-rules-death-penalty-unlawful" target="_blank"><h2>Washington's state Supreme Court outlaws death penalty</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Lydia Wheeler</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Hill on October 10, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.nytimes.com/2018/10/10/nyregion/nauman-hussain-arrested-limo-crash.html" target="_blank"><h2>Washington Supreme Court Outlaws Death Penalty in the State for Good</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Mark Joesph Stern</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Slate on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+<!--   <div class="panel poll">
+    <h1 class="panel-title">Poll</h1>
+    <h3>Generally speaking, are you for or against the death penalty?</h3>
+      <form>
+      <input type="radio" name="vote" value="0" onclick="">
+      For
+      <br>
+      <input type="radio" name="vote" value="1" onclick="">
+      Against
+      <br>
+      <input type="radio" name="vote" value="2" onclick=""> 
+      Undecided
+      </form>
+      <br>
+      <button type="button" onclick="showPollResults()">Submit</button>
+  </div>
+
+  <div class="poll results">
+    <h1 class="panel-title">Poll</h1>
+    <h3>Generally speaking, are you for or against the death penalty?</h3>
+    <div id="results-box">
+      <p class="poll-option">For</p>
+      <span class="poll-bar" id="choice-1"><p class="poll-percentage">40%</p></span>
+      <p class="poll-option">Against</p>
+      <span class="poll-bar" id="choice-2"><p class="poll-percentage">30%</p></span>
+      <p class="poll-option">Undecided</p>
+      <span class="poll-bar" id="choice-3"><p class="poll-percentage">18%</p></span>
+    </div>
+  </div> -->
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- SAUDI JOURNALIST UPDATE -->
+<div id="story5-read-more" hidden>
+  <div id="story5-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.cnn.com/2018/10/11/politics/khashoggi-us-intelligence-saudi-plan-to-lure-journalist/index.html" target="_blank"><h2>Saudis discussed plan to lure Jamal Khashoggi to Saudi Arabia, US intercepts show</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Elise Labott</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by CNN on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.washingtonpost.com/world/national-security/crown-prince-sought-to-lure-khashoggi-back-to-saudi-arabia-and-detain-him-us-intercepts-show/2018/10/10/57bd7948-cc9a-11e8-920f-dd52e1ae4570_story.html?noredirect=on&utm_term=.b14e42b1550f" target="_blank"><h2>Crown prince sought to lure Khashoggi back to Saudi Arabia and detain him, U.S. intercepts show</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Shane Harris</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Washington Post on October 10, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.nbcnews.com/news/world/screenshots-show-khashoggi-did-not-see-text-messages-after-entering-n918856" target="_blank"><h2>Screenshots show Khashoggi did not see text messages after entering Saudi consulate</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Josh Lederman</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by NBC News on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.theguardian.com/world/2018/oct/11/jamal-khashoggi-saudi-arabia-under-pressure-from-trump-administration" target="_blank"><h2>Trump announces Jamal Khashoggi investigation but says he won't halt Saudi arms sales</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Julian Borger, Martin Chulov and Patrick Wintour</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Guardian on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.aljazeera.com/news/2018/10/jamal-khashoggi-case-latest-updates-181010133542286.html" target="_blank"><h2>Jamal Khashoggi case: All the latest updates</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Still being updated</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Al Jazeera on October 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>?? minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>

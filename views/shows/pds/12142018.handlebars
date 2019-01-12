@@ -1,0 +1,394 @@
+{{#section 'head'}} 
+    <link rel="stylesheet" type="text/css" href="/css/grid-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/pds-styles.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/pds/12142018-scripts.js"></script>
+    <script type="text/javascript" src="/js/carousel.js"></script>
+    <script type="text/javascript" src="/js/info.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/read-more-helpers.js"></script>
+{{/section}}
+
+{{>navbar}}
+ 
+ <div class="wrapper">
+
+    <div class="left">
+      <div id="player-wrapper">
+        <div id="player"></div>
+      </div>
+
+      <div id="info-wrapper">
+        <div id="info-nav">
+          <ul id="info-nav-links">
+            <li class="tab open"><a onclick="infoTab(0)" href="javascript:void(0);">About</a></li>
+            <li class="tab"><a onclick="infoTab(1)" href="javascript:void(0);">Story Navigation</a></li>
+            <li class="tab"><a onclick="infoTab(2)" href="javascript:void(0);">Credits</a></li>
+          </ul>
+        </div>
+        <div id="info">
+          <div class="info-window" id="info-title">
+            <h2 class="info-heading">Horrifying NYPD Video Goes Viral, David Dobrik Rejected, Florida Drill Gone Wrong, &amp; Twitch Evolves</h2>
+            <p>Posted on Dec 14, 2018</p>
+          </div>
+
+          <div class="info-window" id="info-story-nav" hidden>
+            <h2 class="info-heading">Jump to a story</h2>
+            <ul id="story-nav-links">
+              <li><a class="story-nav" onclick="navTo(0)" href="javascript:void(0);">Intro</a></li>
+              <li><a class="story-nav" onclick="navTo(1)" href="javascript:void(0);">TIME / Khashoggi</a></li>
+              <li><a class="story-nav" onclick="navTo(2)" href="javascript:void(0);">Dobrik / Ninja</a></li>
+              <li><a class="story-nav" onclick="navTo(3)" href="javascript:void(0);">Today In Awesome</a></li>
+              <li><a class="story-nav" onclick="navTo(4)" href="javascript:void(0);">Florida School Drill</a></li>
+              <li><a class="story-nav" onclick="navTo(5)" href="javascript:void(0);">NYPD Video with Mom &amp; Baby (Warning: Graphic)</a></li>
+              <li><a class="story-nav" onclick="navTo(6)" href="javascript:void(0);">Outro</a></li>
+            </ul>
+          </div>
+
+          <div class="info-window" id="info-credits" hidden>
+            <h2 class="info-heading">Credits</h2>
+            <p>Edited by: James Girardier, Julie Goldberg</p>
+            <p>Produced by: Amanda Morones</p>
+            <p>Art Director: Brian Borst</p>
+            <p>Writing/Research: Philip DeFranco, Brian Espinoza, Neena Pesqueda, Cecelia Applegate</p>
+            <p>RR Exclusive Interview: Dani Rosenberg</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+      
+
+    <div class="right">
+      <div id="read-more">
+        <button type="button" id="minimized-read-more" class="hide-show-read-more" onclick="hideOrShow()" hidden><i class="fas fa-plus-square"></i></button>
+        <span id="mini-bar" hidden></span>
+        <div id="live-read-more">
+          <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+          
+          <div class="panel showing">
+            <h1 class="panel-title">What's up you beautiful bastards?</h1>
+            <h2>Welcome to the Philip DeFranco Show for Dec 14, 2018</h2>
+          </div>
+
+          <span class="progress-bar"></span>
+        </div>
+      </div>
+
+      <div id="conversation">
+        <div id="live-conversation">
+          <div id="comment-top-bar">
+            <h1>Comments</h1>
+            <!-- <label>Sort by</label>
+            <button id="most-recent" class="sort-by sorted">Most Recent</button>
+            <button id="top-voted" class="sort-by">Top Voted</button> -->
+          </div>
+
+          <div id="comments-wrapper">
+            {{#each comments}}
+            <div class="comment">
+              <img src="/img/avatar.png" class="pfp">
+              <p class="username">{{user_name}}</p>
+              <p class="date">{{posted_on}}</p>
+              <p class="content">{{content}}</p>
+              <button class="comment-button" id="reply" href="#">Reply</button>
+              <button class="comment-button vote" id="disagree" href="#">Disagree ({{dislikes}})</button>
+              <button class="comment-button vote" id="agree" href="#">Agree ({{likes}})</button>
+            </div>
+            {{/each}}
+          </div>
+          
+          <div class="add-comment">
+            {{#if user}}
+            <form id="comment-form">
+              <textarea id="comment-content" name="comment" placeholder="Join the conversation..."></textarea>
+              <br>
+              <input id="hidden-episode-name" hidden type="text" name="episode" value="12142018">
+              <input id="hidden-story" hidden type="text" name="story" value="0">
+              <input id="hidden-user-id" hidden type="text" value="{{user._id}}"></input>
+              <input id="hidden-user-name" hidden type="text" value="{{user.first_name}} {{user.last_name}}"></input>
+              <button type="submit">Submit</button>
+            </form>
+            {{else}}
+            <p id="logged-out-comment">You must <a href="/users/login">log in</a> or <a href="/users/signup">sign up</a> to leave a comment.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- READ MORE -->
+
+<!-- INTRO -->
+<div id="story0-read-more" hidden>
+  <div class="panel showing">
+    <h1 class="panel-title">What's up you beautiful bastards?</h1>
+    <h2>Welcome to the Philip DeFranco Show for Dec 14, 2018</h2>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- TIME POTY -->
+<div id="story1-read-more" hidden>
+  <div id="story1-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="http://time.com/person-of-the-year-2018-the-guardians/" target="_blank"><h2>TIME Person of the Year 2018</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Karl Vick</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by TIME on December 13, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>25 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.newyorker.com/news/our-columnists/times-person-of-the-year-honors-jamal-khashoggi-and-the-guardians-of-the-truth" target="_blank"><h2>Time’s Person of the Year Honors Jamal Khashoggi and the Guardians of the Truth</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Robin Wright</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The New Yorker on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>7 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- DOBRIK / NINJA -->
+<div id="story2-read-more" hidden>
+  <div id="story2-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.tubefilter.com/2018/12/12/david-dobrik-rejected-netflix-show/" target="_blank"><h2>David Dobrik Wanted To Stop Vlogging After 420th Video, But Forged On After Rejected Netflix Show</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Geoff Weiss</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by tubefilter on December 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.tubefilter.com/2018/12/13/ninja-commentating-nfl-game-twitch-thursday-night-football/" target="_blank"><h2>Ninja Scores Commentator Role For Tonight’s NFL Game, Streamed On Twitch</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by James Loke Hale</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Verge on December 13, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.polygon.com/2018/12/13/18138729/ninja-twitch-thursday-night-football-announcer-chiefs-chargers-game" target="_blank"><h2>Ninja provides Twitch’s live commentary for tonight’s NFL game</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Owen S. Good</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Polygon on December 13, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- TODAY IN AWESOME -->
+<div id="story3-read-more" hidden>
+  <div id="story3-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+    <span class="dot" onclick="currentPanel(5)"></span> 
+    <span class="dot" onclick="currentPanel(6)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=B_smHgWO6F8" target="_blank"><h2>The War In Afghanistan, 17 Years Later Here's Why It Might Never End...</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=B_smHgWO6F8" target="_blank"><img src="/img/taliban.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=y_sopRiMkN4" target="_blank"><h2>Why We Are Mean to Those We Love</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=y_sopRiMkN4" target="_blank"><img src="/img/tia-mean.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=5okLnZB4QNY" target="_blank"><h2>How To Perform 10 Magic Tricks With Eggs</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=5okLnZB4QNY" target="_blank"><img src="/img/tia-egg.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=GIMVge5TYz4" target="_blank"><h2>How fast does glass crack? - The Slow Mo Guys</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=GIMVge5TYz4" target="_blank"><img src="/img/tia-glass.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=GEaYOx3JVO8" target="_blank"><h2>I Think I've Got This With Chip Chapley - Episode 1 "Fish Facts"</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=GEaYOx3JVO8" target="_blank"><img src="/img/tia-fish.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=KOnpjyHDQuI" target="_blank"><h2>Every Spider-Man Movie &amp; TV Show Explained By Kevin Smith | WIRED</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=KOnpjyHDQuI" target="_blank"><img src="/img/tia-everyspider.jpg"></a>
+  </div>
+  
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=Slsu0E2xmcc" target="_blank"><h2>Secret Link of the Day</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=Slsu0E2xmcc" target="_blank"><img src="/img/tia-secret.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- ORLANDO CODE RED DRILL -->
+<div id="story4-read-more" hidden>
+  <div id="story4-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.orlandosentinel.com/news/breaking-news/os-ne-lake-brantley-code-red-drill-20181206-story.html" target="_blank"><h2>Parents outraged after Lake Brantley High issues active shooter alert without telling students it's a drill</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Michael Williams</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Orlando Sentinel on December 6, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.clickorlando.com/news/what-went-wrong-after-lake-brantleys-code-red-drill" target="_blank"><h2>What went wrong after Lake Brantley High's code red drill</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Nadeen Yanes</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Click Orlando on December 7, 2018 (Updated on December 19)</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- NYPD VIDEO MOM & BABY -->
+<div id="story5-read-more" hidden>
+  <div id="story5-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://nypost.com/2018/12/13/nypd-commissioner-defends-cops-who-ripped-baby-from-mothers-arms/" target="_blank"><h2>NYPD Commissioner Defends Cops Who Ripped Baby From Mother's Arms</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Amanda Woods and Aaron Feis</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The New York Post on December 13, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.nytimes.com/2018/12/11/nyregion/jazmine-headley-baby-video-nypd.html" target="_blank"><h2>Charges Dropped Against Brooklyn Mother Who Had Baby Ripped from Her Arms by Police</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Michael Gold and Ashley Southall</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The New York Times on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>8 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://abcnews.go.com/beta-story-container/US/warrant-dismissed-jazmine-headley-mother-video-baby-yanked/story?id=59773386" target="_blank"><h2>Warrant dismissed against Jazmine Headley, mother seen in video having baby yanked from her arms by police</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Bill Hutchinson and Aaron Katersky</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by ABC News on December 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.vox.com/identities/2018/12/11/18136624/jazmine-headley-charges-dropped-nypd-video-training" target="_blank"><h2>Video of police ripping a black child from his mom has sparked debate over NYPD practices</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by P.R. Lockhart</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Vox on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>8 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.foxnews.com/us/mom-arrested-in-video-that-sparked-outrage-freed-from-jail" target="_blank"><h2>Mom arrested in video that sparked outrage freed from jail</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Uncredited</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Fox News on December 11, 2018 (Updated December 12)</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- OUTRO -->
+<div id="story6-read-more" hidden>
+  <div id="story6-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Miss yesterday's PDS? Get Phil'd In</h1>
+    <a class="article-title" href="/shows/PDS/12132018"><h2>What Youtube Rewind's Historic Fallout &amp; Response Means, Taylor Swift Privacy Controversy, &amp; More</h2></a>
+    <a class="article-thumbnail" href="/shows/PDS/12132018"><img src="/img/12132018.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Yesterday's Morning Breakdown</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=B_smHgWO6F8" target="_blank"><h2>The War In Afghanistan, 17 Years Later Here's Why It Might Never End...</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=B_smHgWO6F8" target="_blank"><img src="/img/taliban.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Thanks for the support!</h1>
+    <a class="article-title" href="https://www.patreon.com/DeFranco" target="_blank"><h2>Join DeFranco Elite on Patreon</h2></a>
+    <a class="article-thumbnail" href="https://www.patreon.com/DeFranco" target="_blank"><img src="/img/patreon.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>

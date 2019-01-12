@@ -1,0 +1,30 @@
+<nav id="top-bar">
+  <a class="top-bar-links" id="nav-home" href="/">Home</a>
+  <a class="top-bar-links" id="nav-news" href="/shows/news">News Shows</a>
+  <a class="top-bar-links" id="nav-other" href="/shows/other">Podcasts &amp; More</a>
+  <a class="top-bar-links" id="nav-patreon" href="https://www.patreon.com/DeFranco" target="_blank">DeFranco Elite</a>
+  <a class="top-bar-links" id="nav-store" href="https://teespring.com/stores/defranco-top-sellers" target="_blank">Store</a>
+
+  {{#if user}}
+  <!-- <a class="profile dropdown" href="#">Profile</a> -->
+  <div id="profile-wrapper" class="dropdown profile">
+    <img src="/img/avatar.png">
+    <a class="top-bar-links profile" href="">{{user.first_name}} {{user.last_name}}</a>
+    <div id="profile-dropdown-menu" hidden>
+        {{#if user.admin}}
+          <a href="/admin">Admin</a>
+        {{/if}}
+        <a href="/users/edit">Edit Profile</a>
+        <a href="/users/logout">Logout</a>
+    </div>
+  </div>
+  {{else}}
+  <a class="top-bar-links profile" href="/users/signup">Sign Up</a>
+  <a class="top-bar-links profile" href="/users/login">Log In</a>
+  {{/if}}
+
+  <form id="searchbar">
+    <input type="text" placeholder="Search currently disabled">
+    <button type="button"><i class="fas fa-search"></i></button>
+  </form>
+</nav>

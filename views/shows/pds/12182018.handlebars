@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+{{#section 'head'}} 
+    <link rel="stylesheet" type="text/css" href="/css/grid-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/pds-styles.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/pds/12182018-scripts.js"></script>
+    <script type="text/javascript" src="/js/carousel.js"></script>
+    <script type="text/javascript" src="/js/info.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/read-more-helpers.js"></script>
+{{/section}}
+
+{{>navbar}}
+ 
+ <div class="wrapper">
+
+    <div class="left">
+      <div id="player-wrapper">
+        <div id="player"></div>
+      </div>
+
+      <div id="info-wrapper">
+        <div id="info-nav">
+          <ul id="info-nav-links">
+            <li class="tab open"><a onclick="infoTab(0)" href="javascript:void(0);">About</a></li>
+            <li class="tab"><a onclick="infoTab(1)" href="javascript:void(0);">Story Navigation</a></li>
+            <li class="tab"><a onclick="infoTab(2)" href="javascript:void(0);">Credits</a></li>
+          </ul>
+        </div>
+        <div id="info">
+          <div class="info-window" id="info-title">
+            <h2 class="info-heading">WOW! The PewDiePie Situation, Trust Problems, Fortnite Legal Troubles Grow, &amp; Trump's New BAN</h2>
+            <p>Posted on Dec 18, 2018</p>
+          </div>
+
+          <div class="info-window" id="info-story-nav" hidden>
+            <h2 class="info-heading">Jump to a story</h2>
+            <ul id="story-nav-links">
+              <li><a class="story-nav" onclick="navTo(0)" href="javascript:void(0);">Intro</a></li>
+              <li><a class="story-nav" onclick="navTo(1)" href="javascript:void(0);">Fortnite Lawsuits</a></li>
+              <li><a class="story-nav" onclick="navTo(2)" href="javascript:void(0);">Bump Stock Ban</a></li>
+              <li><a class="story-nav" onclick="navTo(3)" href="javascript:void(0);">Today In Awesome</a></li>
+              <li><a class="story-nav" onclick="navTo(4)" href="javascript:void(0);">Media Mistrust</a></li>
+              <li><a class="story-nav" onclick="navTo(5)" href="javascript:void(0);">PewDiePie / WSJ</a></li>
+              <li><a class="story-nav" onclick="navTo(6)" href="javascript:void(0);">Outro</a></li>
+            </ul>
+          </div>
+
+          <div class="info-window" id="info-credits" hidden>
+            <h2 class="info-heading">Credits</h2>
+            <p>Edited by: James Girardier, Julie Goldberg</p>
+            <p>Produced by: Amanda Morones</p>
+            <p>Art Director: Brian Borst</p>
+            <p>Writing/Research: Philip DeFranco, Brian Espinoza, Cecelia Applegate</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+      
+
+    <div class="right">
+      <div id="read-more">
+        <button type="button" id="minimized-read-more" class="hide-show-read-more" onclick="hideOrShow()" hidden><i class="fas fa-plus-square"></i></button>
+        <span id="mini-bar" hidden></span>
+        <div id="live-read-more">
+          <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+          
+          <div class="panel showing">
+            <h1 class="panel-title">What's up you beautiful bastards?</h1>
+            <h2>Welcome to the Philip DeFranco Show for Dec 18, 2018</h2>
+          </div>
+
+          <span class="progress-bar"></span>
+        </div>
+      </div>
+
+      <div id="conversation">
+        <div id="live-conversation">
+          <div id="comment-top-bar">
+            <h1>Conversation</h1>
+            <label>Sort by</label>
+            <button id="most-recent" class="sort-by sorted">Most Recent</button><!-- 
+          --><button id="top-voted" class="sort-by">Top Voted</button>
+          </div>
+
+          <div id="comments-wrapper">
+            {{#each comments}}
+            <div class="comment">
+              <img src="/img/avatar.png" class="pfp">
+              <p class="username">{{user_name}}</p>
+              <p class="date">{{posted_on_full}}</p>
+              <p class="content">{{content}}</p>
+              <button class="comment-button" id="reply" href="#">Reply</button>
+              <button class="comment-button vote" id="disagree" href="#">Disagree ({{dislikes}})</button>
+              <button class="comment-button vote" id="agree" href="#">Agree ({{likes}})</button>
+            </div>
+            {{/each}}
+          </div>
+          
+          <div class="add-comment">
+            {{#if user}}
+            <form id="comment-form">
+              <textarea id="comment-content" name="comment" placeholder="Join the conversation..."></textarea>
+              <br>
+              <input id="hidden-episode-name" hidden type="text" name="episode" value="12182018">
+              <input id="hidden-story" hidden type="text" name="story" value="0">
+              <input id="hidden-user-id" hidden type="text" value="{{user._id}}"></input>
+              <input id="hidden-user-name" hidden type="text" value="{{user.first_name}} {{user.last_name}}"></input>
+              <button type="submit">Submit</button>
+            </form>
+            {{else}}
+            <p id="logged-out-comment">You must <a href="/users/login">log in</a> or <a href="/users/signup">sign up</a> to leave a comment.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- READ MORE -->
+
+<!-- INTRO -->
+<div id="story0-read-more" hidden>
+  <div class="panel showing">
+    <h1 class="panel-title">What's up you beautiful bastards?</h1>
+    <h2>Welcome to the Philip DeFranco Show for Dec 18, 2018</h2>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- FORTNITE LAWSUITS -->
+<div id="story1-read-more" hidden>
+  <div id="story1-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.complex.com/pop-culture/2018/12/alfonso-ribeiro-sues-fortnite-over-carlton-dance?utm_medium=social&utm_source=twitter.com&utm_campaign=complexmag" target="_blank"><h2>Alfonso Ribeiro Sues 'Fortnite' and 'NBA 2K' Creators Over the Carlton Dance (UPDATE)</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Sarah Jasmine Montgomery</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Complex on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- BUMP STOCK BAN -->
+<div id="story2-read-more" hidden>
+  <div id="story2-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Related Document</h1>
+    <a class="article-title" href="https://int.nyt.com/data/documenthelper/537-bump-stock-final-rule/e1f6dad9197d576b4de4/optimized/full.pdf#page=1?action=click&module=Intentional&pgtype=Article" target="_blank"><h2>Department of Justice Ruling on Bump-Stock-Type Devices</h2></a>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published on December 17, 2018</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.npr.org/2017/10/13/557433452/poll-majorities-of-both-parties-favor-increased-gun-restrictions" target="_blank"><h2>Poll: Majorities Of Both Parties Favor Increased Gun Restrictions</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Danielle Kurtzleben</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by NPR on October 13, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.cnn.com/2018/12/18/politics/bump-stocks-ban/index.html" target="_blank"><h2>Trump administration officially bans bump stocks</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Laura Jarrett</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by CNN on December 18, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- TODAY IN AWESOME -->
+<div id="story3-read-more" hidden>
+  <div id="story3-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+    <span class="dot" onclick="currentPanel(5)"></span> 
+    <span class="dot" onclick="currentPanel(6)"></span>
+    <span class="dot" onclick="currentPanel(7)"></span> 
+    <span class="dot" onclick="currentPanel(8)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Brought To You By</h1>
+    <a class="article-title" href="https://postmates.com/" target="_blank"><h2>Postmates - Use coupon code 'PDS' for $100 free delivery credit for all new customers!</h2></a>
+    <a class="article-thumbnail" href="https://postmates.com/" target="_blank"><img src="/img/postmates.png"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="/shows/episode/5c1c29340256562ad8e27895" target="_blank"><h2>The Future of Affirmative Action Explained...</h2></a>
+    <a class="article-thumbnail" href="/shows/episode/5c1c29340256562ad8e27895" target="_blank"><img src="/img/aa.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=xoxhDk-hwuo" target="_blank"><h2>Package Thief vs. Glitter Bomb Trap</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=xoxhDk-hwuo" target="_blank"><img src="/img/tia-glitter.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=Tp2qkhHU0Mw" target="_blank"><h2>Adam Sandler: 100% Fresh | Chris Farley Tribute [HD] | Netflix</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=Tp2qkhHU0Mw" target="_blank"><img src="/img/tia-sandler.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=7y-hKLfeurY" target="_blank"><h2>Skiing Stereotypes | Dude Perfect</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=7y-hKLfeurY" target="_blank"><img src="/img/tia-dude-snow.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=kHDvp1zH04g" target="_blank"><h2>Jennifer Lopez &amp; Leah Remini Answer the Web's Most Searched Questions | WIRED</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=kHDvp1zH04g" target="_blank"><img src="/img/tia-lopez.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=zXnSTTUPm9U" target="_blank"><h2>Season 6 First Look - Brooklyn Nine-Nine (Sneak Peek)</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=zXnSTTUPm9U" target="_blank"><img src="/img/tia-99.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=HOeSwjhSGoM" target="_blank"><h2>Cardi B Carpool Karaoke</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=HOeSwjhSGoM" target="_blank"><img src="/img/tia-cardi.jpg"></a>
+  </div>
+  
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=F-VjCLR5L-c" target="_blank"><h2>Secret Link of the Day</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=F-VjCLR5L-c" target="_blank"><img src="/img/tia-secret.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- MEDIA TRUST -->
+<div id="story4-read-more" hidden>
+  <div id="story4-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Related Study</h1>
+    <a class="article-title" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0208600" target="_blank"><h2>Checking facts and fighting back: Why journalists should defend their profession</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Raymond J. Pingree, Brian Watson, Mingxiao Sui, Kathleen Searles, Nathan P. Kalmoe, Joshua P. Darr, Martina Santia, Kirill Bryanov</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by PLOS on December 10, 2018</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://news.gallup.com/poll/243665/media-trust-continues-recover-2016-low.aspx" target="_blank"><h2>U.S. Media Trust Continues to Recover From 2016 Low</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Jeffrey M. Jones</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Gallup on October 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.axios.com/trust-in-american-media-still-low-but-improving-bf7842ca-9ddb-4334-a865-6e98f5334db2.html" target="_blank"><h2>Trust in the media is starting to make a comeback</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Sarah Fischer</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Axios on December 18, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- PEWDIEPIE / WSJ -->
+<div id="story5-read-more" hidden>
+  <div id="story5-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <!-- <span class="dot" onclick="currentPanel(4)"></span> -->
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+<!--   <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://web.archive.org/web/20181217152746/https://partners.wsj.com/oracle/pewdiepie-apology/" target="_blank"><h2>Global Compact for Migration Adopted This Week as Expected</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Nayla Rush</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Center for Immigration Studies on December 14, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>6 minute read</p>
+  </div> -->
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.theverge.com/2018/12/17/18144807/pewdiepie-tseries-wall-street-journal-hack-subscribers" target="_blank"><h2>PewDiePie fans hack the Wall Street Journal</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Julia Alexander</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Verge on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>2 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.digitaltrends.com/computing/hacking-printers-pewdiepie-t-series/" target="_blank"><h2>PewDiePie supporters hack printers, hope to boost his subscription numbers</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Anita George </p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Digital Trends on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.dexerto.com/entertainment/printer-hackers-strike-again-to-help-pewdiepie-grow-his-subscriber-lead-over-t-series-255456" target="_blank"><h2>Printer hackers strike again to help PewDiePie grow his subscriber lead over T-Series</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Albert Petrosyan</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Dexerto on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>4 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://motherboard.vice.com/en_us/article/9k4mz5/hackers-deface-wall-street-journal-wsj-pewdiepie-tseries" target="_blank"><h2>Hackers Deface Wall Street Journal With Pro-PewDiePie Message</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Joseph Cox</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Motherboard on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- OUTRO -->
+<div id="story6-read-more" hidden>
+  <div id="story6-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Miss yesterday's PDS? Get Phil'd In</h1>
+    <a class="article-title" href="/shows/PDS/12172018"><h2>The James Charles Privacy Problem Is Actually Much Bigger, Kanye West, Pete Davidson, &amp; The UN</h2></a>
+    <a class="article-thumbnail" href="/shows/PDS/12172018"><img src="/img/12172018.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">The Latest Morning Breakdown</h1>
+    <a class="article-title" href="/shows/episode/5c1c29340256562ad8e27895" target="_blank"><h2>The Future of Affirmative Action Explained...</h2></a>
+    <a class="article-thumbnail" href="/shows/episode/5c1c29340256562ad8e27895" target="_blank"><img src="/img/aa.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Thanks for the support!</h1>
+    <a class="article-title" href="https://www.patreon.com/DeFranco" target="_blank"><h2>Join DeFranco Elite on Patreon</h2></a>
+    <a class="article-thumbnail" href="https://www.patreon.com/DeFranco" target="_blank"><img src="/img/patreon.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>

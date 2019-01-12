@@ -1,0 +1,29 @@
+{{#section 'head'}}	
+	<link rel="stylesheet" type="text/css" href="/css/news-other-styles.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/news-other-scripts.js"></script>
+{{/section}}
+
+{{>navbar}}
+
+<div id="bg">
+	<div id="news-other-wrapper">
+		<h1>All Shows</h1>
+
+		<div id="episodes-container">
+			{{#each series}}
+			<div class="episode">
+				<a href="{{link}}"><img src="https://via.placeholder.com/360x200"></a>
+				<a href="{{link}}" class="title">{{name}}</a>
+				<p>{{description}}</p>
+			</div>
+			{{/each}}
+
+			
+		</div>
+	</div>
+</div>
+
+{{>footer}}

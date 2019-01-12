@@ -1,0 +1,69 @@
+{{#section 'head'}} 
+  <link rel="stylesheet" type="text/css" href="/css/pds-10112018-styles.css">
+{{/section}}
+
+{{>navbar}}
+
+<div class="poll">
+  <h1 class="panel-title">Poll</h1>
+  <h3>Who were you hoping would win UFC 229?</h3>
+    <form> <!-- method="post" action="/shows/poll/101120181"> -->
+    <input type="radio" name="vote" value="0">
+    McGregor
+    <br>
+    <input type="radio" name="vote" value="1">
+    Khabib
+    <br>
+    <input type="radio" name="vote" value="2"> 
+    Happy with either
+    <br>
+    <input type="radio" name="vote" value="3">
+    I don't care about the UFC
+    <br>
+    <button type="submit" onclick="showPollResults()">Submit</button>
+    </form>
+</div>
+
+<div class="">
+  <h1 class="panel-title">Poll</h1>
+  <h3>Who were you hoping would win UFC 229?</h3>
+  <div id="results-box">
+    <p class="poll-option">McGregor</p>
+    <span class="poll-bar" id="choice-1"><p class="poll-percentage">40%</p></span>
+    <p class="poll-option">Khabib</p>
+    <span class="poll-bar" id="choice-2"><p class="poll-percentage">30%</p></span>
+    <p class="poll-option">Happy with either</p>
+    <span class="poll-bar" id="choice-3"><p class="poll-percentage">18%</p></span>
+    <p class="poll-option">I don't care about the UFC</p>
+    <span class="poll-bar" id="choice-4"><p class="poll-percentage">12%</p></span>
+  </div>
+</div>
+
+
+{{#if poll}}
+<div class="poll">
+  <h1 class="panel-title">Poll</h1>
+  <h3>{{poll.question}}</h3>
+    <form> <!-- method="post" action="/shows/poll/101120181"> -->
+    {{#each poll.choices}}
+    <input type="radio" name="vote" value="0">
+    {{option}}
+    <br>
+    {{/each}}
+    <button type="submit" onclick="showPollResults()">Submit</button>
+    </form>
+</div>
+{{/if}}
+
+{{#if poll}}
+<div class="">
+  <h1 class="panel-title">Poll</h1>
+  <h3>{{poll.question}}</h3>
+  <div id="results-box">
+    {{#each poll.choices}}
+    <p class="poll-option">{{option}}</p>
+    <span class="poll-bar" id="choice-1"><p class="poll-percentage">{{votes}} votes</p></span>
+    {{/each}}
+  </div>
+</div>
+{{/if}}

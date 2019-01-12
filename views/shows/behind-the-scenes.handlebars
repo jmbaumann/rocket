@@ -1,0 +1,46 @@
+{{#section 'head'}}	
+	<link rel="stylesheet" type="text/css" href="/css/news-other-styles.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/news-other-scripts.js"></script>
+{{/section}}
+
+{{>navbar}}
+
+<div id="bg">
+	<div id="news-other-wrapper">
+		<h1>Podcasts &amp; More</h1>
+		<div id="show-buttons">
+			{{>other-show-buttons}}
+		</div>
+
+		<div id="episodes-container">
+			{{#each videos}}
+			<div class="episode">
+				<a href="{{filepath}}"><img src="/img/{{thumbnail}}"></a>
+				<a href="{{filepath}}" class="title">{{title}}</a>
+				<p class="date">{{posted_on}}</p>
+			</div>
+			{{/each}}
+
+			
+		</div>
+	</div>
+</div>
+
+{{>footer}}
+
+<script>
+	var buttons = document.getElementsByClassName("show-option");
+	for(var i = 0; i < buttons.length; i++){
+		buttons[i].classList.remove("option-chosen");
+	}
+	document.getElementById("bts").classList.add("option-chosen");
+
+	var navs = document.getElementsByClassName("top-bar-links");
+	for(var i = 0; i < navs.length; i++){
+		navs[i].classList.remove("nav-active");
+	}
+	document.getElementById("nav-other").classList.add("nav-active");
+</script>

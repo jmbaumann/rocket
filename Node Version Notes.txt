@@ -1,0 +1,12 @@
+node v 0.0.4
+First implementation of node.js and MongoDB combined with the HTML/CSS/Javascript of previous versions.
+
+node v 0.0.5
+Added ability to sign up for and account which is stored in MongoDB database as well as the ability to log in and out of existing accounts. Comments can be made on PDS page and stored in a database. Created home page and PDS page (showing all episodes), both still need styling.
+
+node v 0.0.6
+
+
+
+Future Easter Egg
+Searching "Beer Me" just sends you to a random video

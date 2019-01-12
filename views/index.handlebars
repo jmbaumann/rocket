@@ -1,0 +1,78 @@
+{{#section 'head'}}	
+	<link rel="stylesheet" type="text/css" href="/css/index-styles.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/index-scripts.js"></script>
+{{/section}}
+
+{{>navbar}}
+
+<div id="homepage">
+	<div id="featured-video">
+		<h1>Featured Video</h1>
+		<a href="/shows/PDS/12182018" id="thumbnail"><img src="/img/12182018.jpg"></a>
+		<a href="/shows/PDS/12182018" class="featured-title">WOW! The PewDiePie Situation, Trust Problems, Fortnite Legal Troubles Grow, &amp; Trump's New BAN</a>
+		<p><a id="featured-series" href="/shows/PDS">The Philip DeFranco Show</a> - Posted on December 18, 2018</p>
+	</div>
+	<!-- <div id="featured-other">
+		<h1>Check this out too!</h1>
+	</div> -->
+
+	<div class="most-recent" id="most-recent-pds">
+		<h2><a href="/shows/PDS">Most Recent Philip DeFranco Show Episodes</a></h2>
+		
+		<div class="episode-carousel">
+			<button type="button" id="shiftLPDS" class="car-control">&#10094;</button>
+	  		<button type="button" id="shiftRPDS" class="car-control">&#10095;</button>
+
+			<ul class="all-episodes" id="all-recent-pds">
+				{{#each pds}}
+				<div class="episode">
+					<a href="/shows/PDS/{{PDS_id}}"><img src="/img/{{thumbnail}}"></a>
+					<a href="/shows/PDS/{{PDS_id}}" class="title">{{title}}</a>
+					<p class="date">{{posted_on}}</p>
+				</div>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+
+	<div class="most-recent" id="most-recent-other">
+		<h2><a href="/shows">Other Most Recent Episodes</a></h2>
+		<div class="episode-carousel">
+			<button type="button" id="shiftLOther" class="car-control">&#10094;</button>
+	  		<button type="button" id="shiftROther" class="car-control">&#10095;</button>
+
+			<ul class="all-episodes" id="all-recent-episodes">
+				{{#each other}}
+				<li class="episode">
+					<a href="/shows/episode/{{_id}}"><img src="/img/{{thumbnail}}"></a>
+					<a href="/shows/episode/{{_id}}" class="title">{{title}}</a>
+					<a href="#" class="series">{{series}}</a>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+
+	<div class="most-recent" id="featured-shop">
+		<h2><a href="#">Features Store Items</a></h2>
+		<div class="episode-carousel">
+			<button type="button" id="shiftLShop" class="car-control">&#10094;</button>
+	  		<button type="button" id="shiftRShop" class="car-control">&#10095;</button>
+
+			<ul class="all-episodes" id="all-featured-shop">
+				{{#each products}}
+				<div class="product">
+					<a href="{{link}}" target="_blank"><img src="/img/{{thumbnail}}"></a>
+					<a href="{{link}}" target="_blank" class="title">{{name}}</a>
+					<p class="price">$23.99</p>
+				</div>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</div>	
+
+{{>footer}}

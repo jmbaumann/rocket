@@ -1,0 +1,40 @@
+DATABASE SCHEMA
+
+VideoSchema
+	title
+	posted_on
+	description
+	series
+	view_count
+	youtube_id
+	filepath
+	thumbnail
+
+	LIKES
+	DISLIKES
+
+-----------------------------
+
+UserSchema
+	email
+	first_name
+	last_name
+	password
+
+CommentSchema
+	user
+	posted_on
+	content
+	likes
+	dislike
+	video_id
+	PDS_story
+
+PollSchema
+	video_id
+	story
+	question
+	num_choices
+	choice 
+		option
+		votes

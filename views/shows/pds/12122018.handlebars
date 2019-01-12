@@ -1,0 +1,394 @@
+{{#section 'head'}} 
+    <link rel="stylesheet" type="text/css" href="/css/grid-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/pds-styles.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/pds/12122018-scripts.js"></script>
+    <script type="text/javascript" src="/js/carousel.js"></script>
+    <script type="text/javascript" src="/js/info.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/read-more-helpers.js"></script>
+{{/section}}
+
+{{>navbar}}
+ 
+ <div class="wrapper">
+
+    <div class="left">
+      <div id="player-wrapper">
+        <div id="player"></div>
+      </div>
+
+      <div id="info-wrapper">
+        <div id="info-nav">
+          <ul id="info-nav-links">
+            <li class="tab open"><a onclick="infoTab(0)" href="javascript:void(0);">About</a></li>
+            <li class="tab"><a onclick="infoTab(1)" href="javascript:void(0);">Story Navigation</a></li>
+            <li class="tab"><a onclick="infoTab(2)" href="javascript:void(0);">Credits</a></li>
+          </ul>
+        </div>
+        <div id="info">
+          <div class="info-window" id="info-title">
+            <h2 class="info-heading">Lilly Singh Female Money Controversy, Cohen AMI, Theresa May, Brexit &amp; What People Are Binging...</h2>
+            <p>Posted on Dec 12, 2018</p>
+          </div>
+
+          <div class="info-window" id="info-story-nav" hidden>
+            <h2 class="info-heading">Jump to a story</h2>
+            <ul id="story-nav-links">
+              <li><a class="story-nav" onclick="navTo(0)" href="javascript:void(0);">Intro</a></li>
+              <li><a class="story-nav" onclick="navTo(1)" href="javascript:void(0);">Lilly Singh/YouTube Highest Paid</a></li>
+              <li><a class="story-nav" onclick="navTo(2)" href="javascript:void(0);">Netflix Stats</a></li>
+              <li><a class="story-nav" onclick="navTo(3)" href="javascript:void(0);">Today In Awesome</a></li>
+              <li><a class="story-nav" onclick="navTo(4)" href="javascript:void(0);">Cohen/Trump</a></li>
+              <li><a class="story-nav" onclick="navTo(5)" href="javascript:void(0);">Brexit</a></li>
+            </ul>
+          </div>
+
+          <div class="info-window" id="info-credits" hidden>
+            <h2 class="info-heading">Credits</h2>
+            <p>Edited by: James Girardier, Julie Goldberg</p>
+            <p>Produced by: Amanda Morones</p>
+            <p>Art Director: Brian Borst</p>
+            <p>Writing/Research: Philip DeFranco, Brian Espinoza, Neena Pesqueda, Cecelia Applegate</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+      
+
+    <div class="right">
+      <div id="read-more">
+        <button type="button" id="minimized-read-more" class="hide-show-read-more" onclick="hideOrShow()" hidden><i class="fas fa-plus-square"></i></button>
+        <span id="mini-bar" hidden></span>
+        <div id="live-read-more">
+          <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+          
+          <div class="panel showing">
+            <h1 class="panel-title">What's up you beautiful bastards?</h1>
+            <h2>Welcome to the Philip DeFranco Show for Dec 12, 2018</h2>
+          </div>
+
+          <span class="progress-bar"></span>
+        </div>
+      </div>
+
+      <div id="conversation">
+        <div id="live-conversation">
+          <div id="comment-top-bar">
+            <h1>Comments</h1>
+            <!-- <label>Sort by</label>
+            <button id="most-recent" class="sort-by sorted">Most Recent</button>
+            <button id="top-voted" class="sort-by">Top Voted</button> -->
+          </div>
+
+          <div id="comments-wrapper">
+            {{#each comments}}
+            <div class="comment">
+              <img src="/img/avatar.png" class="pfp">
+              <p class="username">{{user_name}}</p>
+              <p class="date">{{posted_on}}</p>
+              <p class="content">{{content}}</p>
+              <button class="comment-button" id="reply" href="#">Reply</button>
+              <button class="comment-button vote" id="disagree" href="#">Disagree ({{dislikes}})</button>
+              <button class="comment-button vote" id="agree" href="#">Agree ({{likes}})</button>
+            </div>
+            {{/each}}
+          </div>
+          
+          <div class="add-comment">
+            {{#if user}}
+            <form id="comment-form">
+              <textarea id="comment-content" name="comment" placeholder="Join the conversation..."></textarea>
+              <br>
+              <input id="hidden-episode-name" hidden type="text" name="episode" value="12122018">
+              <input id="hidden-story" hidden type="text" name="story" value="0">
+              <input id="hidden-user-id" hidden type="text" value="{{user._id}}"></input>
+              <input id="hidden-user-name" hidden type="text" value="{{user.first_name}} {{user.last_name}}"></input>
+              <button type="submit">Submit</button>
+            </form>
+            {{else}}
+            <p id="logged-out-comment">You must <a href="/users/login">log in</a> or <a href="/users/signup">sign up</a> to leave a comment.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- READ MORE -->
+
+<!-- INTRO -->
+<div id="story0-read-more" hidden>
+  <div class="panel showing">
+    <h1 class="panel-title">What's up you beautiful bastards?</h1>
+    <h2>Welcome to the Philip DeFranco Show for Dec 12, 2018</h2>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+
+<!-- LILLY SINGH -->
+<div id="story1-read-more" hidden>
+  <div id="story1-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.forbes.com/sites/natalierobehmed/2018/12/03/highest-paid-youtube-stars-2018-markiplier-jake-paul-pewdiepie-and-more/#5b08723909ac" target="_blank"><h2>Highest-Paid YouTube Stars 2018: Markiplier, Jake Paul, PewDiePie And More</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Natalie Robehmed and Madeline Berg</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Forbes on December 3, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://metro.co.uk/2018/12/05/lilly-singh-and-patricia-bright-among-those-furious-about-richest-youtubers-list-8212858/" target="_blank"><h2>Lilly Singh and Patricia Bright among those furious about richest YouTubers list</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Louise Griffin</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Metro on December 5, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- NETFLIX STATS -->
+<div id="story2-read-more" hidden>
+  <div id="story2-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://media.netflix.com/en/press-releases/2018-on-netflix-to-all-the-shows-and-movies-weve-loved-before" target="_blank"><h2>2018 on Netflix: To All The Shows and Movies We've Loved Before</h2></a>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Netflix on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>5 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.pornhub.com/insights/2018-year-in-review" target="_blank"><h2>2018 Year In Review - Pornhub Insights</h2></a>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Pornhub on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- TODAY IN AWESOME -->
+<div id="story3-read-more" hidden>
+  <div id="story3-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+    <span class="dot" onclick="currentPanel(5)"></span> 
+    <span class="dot" onclick="currentPanel(6)"></span>
+    <span class="dot" onclick="currentPanel(7)"></span>
+    <span class="dot" onclick="currentPanel(8)"></span>
+    <span class="dot" onclick="currentPanel(9)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=exOcVBQfXxs" target="_blank"><h2>Kids Try Avocado Toast | Kids Try | HiHo Kids</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=exOcVBQfXxs" target="_blank"><img src="/img/tia-kids.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=55kqNg88JqI" target="_blank"><h2>How Emily Dickinson Writes A Poem</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=55kqNg88JqI" target="_blank"><img src="/img/tia-dickinson.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=i33S77yegKo" target="_blank"><h2>Can You Feel It? with Jennifer Lopez and Milo Ventimiglia</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=i33S77yegKo" target="_blank"><img src="/img/tia-feelit.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=i68xCzI406A" target="_blank"><h2>CAPTIVE STATE - Official Trailer [HD] - In Select Theaters March 2019</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=i68xCzI406A" target="_blank"><img src="/img/tia-captivate.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=ledrRhqYhbU"" target="_blank"><h2>ESCAPE ROOM - Resolution (In Theaters January 4)</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=ledrRhqYhbU"" target="_blank"><img src="/img/tia-escaperoom.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=1-RrQNqXoDA" target="_blank"><h2>The Dangerous Effects Of The Hyper Focus Drug</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=1-RrQNqXoDA" target="_blank"><img src="/img/tia-drug.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=NtZVFUvn3_U" target="_blank"><h2>Rooftop Skiing in France | Good Morning By Richard Permin</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=NtZVFUvn3_U" target="_blank"><img src="/img/tia-roofski.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=6aFdEhEZQjE" target="_blank"><h2>Google — Year In Search 2018</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=6aFdEhEZQjE" target="_blank"><img src="/img/tia-google.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=71VpdDb8e6U" target="_blank"><h2>Last Youtuber To Leave Wins $100,000 - Challenge</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=71VpdDb8e6U" target="_blank"><img src="/img/tia-beastcircle.jpg"></a>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Today In Awesome</h1>
+    <a class="article-title" href="https://www.youtube.com/watch?v=z-XHao1YH9w" target="_blank"><h2>Secret Link of the Day</h2></a>
+    <a class="article-thumbnail" href="https://www.youtube.com/watch?v=z-XHao1YH9w" target="_blank"><img src="/img/tia-secret.jpg"></a>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- COHEN / TRUMP -->
+<div id="story4-read-more" hidden>
+  <div id="story4-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span>
+    <span class="dot" onclick="currentPanel(2)"></span> 
+    <span class="dot" onclick="currentPanel(3)"></span> 
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.axios.com/michael-cohen-prison-sentence-mueller-investigation-8a283541-870a-4334-af6e-6ca21d4c906d.html" target="_blank"><h2>Michael Cohen sentenced to 3 years in prison</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Zachary Basu</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Axios on December 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.foxnews.com/politics/cohen-slams-trumps-dirty-deeds-ahead-of-sentencing" target="_blank"><h2>Michael Cohen, former Trump attorney, gets 3 years in prison for tax fraud, campaign finance violations, lying</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Alex Pappas</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Fox News on December 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>8 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.cnbc.com/2018/12/12/federal-prosecutors-give-national-enquirer-publisher-immunity.html" target="_blank"><h2>Federal prosecutors give National Enquirer publisher immunity over hush-money payment to purported Trump lover</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Dan Mangan</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by CNBC on December 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>7 minute read</p>
+  </div>
+
+   <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.cnn.com/2018/12/12/media/american-media-inc-southern-district-new-york/index.html" target="_blank"><h2>National Enquirer publisher AMI strikes deal with prosecutors in Michael Cohen probe</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Tom Kludt</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by CNN Business on December 12, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>3 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
+
+<!-- BREXIT -->
+<div id="story5-read-more" hidden>
+  <div id="story5-read-more-dots" class="read-more-dots">
+    <span class="dot active" onclick="currentPanel(0)"></span> 
+    <span class="dot" onclick="currentPanel(1)"></span> 
+    <span class="dot" onclick="currentPanel(2)"></span>
+    <span class="dot" onclick="currentPanel(3)"></span>
+    <span class="dot" onclick="currentPanel(4)"></span>
+    <span class="dot" onclick="currentPanel(5)"></span>
+  </div>
+
+  <button type="button" class="hide-show-read-more" onclick="hideOrShow()"><i class="fas fa-minus-square"></i></button>
+
+  <button type="button" class="prev" onclick="plusPanel(-1)">&#10094;</button>
+  <button type="button" class="next" onclick="plusPanel(1)">&#10095;</button>
+
+  <div class="panel showing">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.theguardian.com/politics/2018/nov/25/may-brexit-deal-explained-eu-withdrawal-agreement-trade-backstop-citizens-rights" target="_blank"><h2>Brexit deal explained: backstops, trade and citizens' rights</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Daniel Boffey and Jennifer Rankin</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by The Guardian on November 25, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>8 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.ft.com/content/32849728-fd1a-11e8-aebf-99e208d3e521" target="_blank"><h2>Juncker rules out renegotiation of Theresa May’s Brexit deal</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Mehreen Khan</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Financial Times on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>10 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.bbc.com/news/uk-politics-32810887" target="_blank"><h2>Brexit: All you need to know about the UK leaving the EU</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Alex Hunt and Brian Wheeler</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by BBC News on December 17, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>9 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.aljazeera.com/news/2018/12/british-pm-blinks-cancels-brexit-vote-181210211708710.html" target="_blank"><h2>British PM blinks - and cancels Brexit vote</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Gavin O'Toole</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Al Jazeera on December 10, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>10 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://www.cnbc.com/2018/12/11/brexit-what-is-the-irish-backstop-and-why-does-it-matter.html" target="_blank"><h2>What is the Irish backstop? Here’s why it has taken center stage amid chaotic Brexit negotiations</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Sam Meredith</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by CNBC on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>8 minute read</p>
+  </div>
+
+  <div class="panel">
+    <h1 class="panel-title">Further Reading</h1>
+    <a class="article-title" href="https://mobile.reuters.com/article/amp/idUSKBN1OB0NY" target="_blank"><h2>Conservative lawmakers trigger no confidence vote in UK PM May's leadership</h2></a>
+    <p class="reading-description"><i class="fas fa-pen"></i>Written by Annegret Hilse</p>
+    <p class="reading-description"><i class="fas fa-newspaper"></i>Published by Reuters on December 11, 2018</p>
+    <p class="reading-description"><i class="fas fa-stopwatch"></i>1 minute read</p>
+  </div>
+
+  <span class="progress-bar"></span>
+</div>
